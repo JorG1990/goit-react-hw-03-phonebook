@@ -13,3 +13,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fafafa;
+  font-family: 'Poppins', sans-serif;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
