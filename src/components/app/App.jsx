@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import ContacFrom from "../ContactFrom/ContactFrom";
 import ContactList from "../ContacList/ContactList";
 import Filter from "../Filter/Filter";
-import { Section, TitlePhone, SectionContact, TitelContact } from ".//App.styled";
+import { Section, TitlePhone, SectionContact, TitleContact } from ".//App.styled";
 
 
 class App extends Component {
@@ -31,5 +31,51 @@ class App extends Component {
     }));
   };
 
-  filterContacts = () =>
-}
+  filterContacts = () => {
+    const { filter, contacts } = this.state;
+    const minusName = filter.toLowerCase();
+    return contacts.filter(contact => contact.name.toLocaleLowerCase().includes(minusName));
+  };
+
+  deleteContact = contactId => {
+    this.setState ( prevState => ({
+      contacts: prevState.contacts.filter( contact => contact.id !== contactId ),
+    }));
+  };
+
+  viewfilter = e => {
+    const { name, value } = e.currentTarget;
+    this.setState({ [ name ]: value });
+  };
+
+  componentDidUpdate (prevProps, prevState) {
+    const { contacts } = this.state;
+    if (contacts !== prevState.contacts) {
+      localStorage.setItem ("contacts", JSON.stringify (contacts));
+    };
+  };
+
+  render() {
+    const { filter } = this.state;
+    const viewContacts = this.filterContacts();
+
+    return (
+      <div>
+        <Section title="Phoneboock">
+          <TitlePhone>Phoneboock</TitlePhone>
+          <ContacFrom onSumit = { this.viewfilter }/>
+        </Section>
+        <SectionContact title="Contacts">
+          <TitleContact>Contacts</TitleContact>
+          <Filter value = { filter } onChnge = { this.viewfilter }/>
+          <ContactList
+          contacts = { viewContacts }
+          onDeleteContact = { this.deleteContact }
+          />
+        </SectionContact>
+      </div>
+    );
+  };
+};
+
+export default App;
