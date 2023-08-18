@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import ContacFrom from "../ContactFrom/ContactFrom";
 import ContactList from "../ContacList/ContactList";
 import Filter from "../Filter/Filter";
-import { Section, TitlePhone, SectionContact, TitleContact } from ".//App.styled";
+import { Section, TitlePhone, SectionContact, TitleContact } from "./App.styled";
 
 
 class App extends Component {
