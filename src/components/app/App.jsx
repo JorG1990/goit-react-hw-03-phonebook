@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
-import ContacFrom from "../ContactFrom/ContactFrom";
+import ContacFrom from "../ContactForm/ContactForm";
 import ContactList from "../ContacList/ContactList";
 import Filter from "../Filter/Filter";
 import { Section, TitlePhone, SectionContact, TitleContact } from "./App.styled";
