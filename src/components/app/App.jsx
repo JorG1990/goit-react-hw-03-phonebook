@@ -16,6 +16,8 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+    name: '',
+    number: '',
   };
 
   addContact = ({ name, number }) => {
@@ -35,7 +37,7 @@ class App extends Component {
   filterContacts = () => {
     const { filter, contacts } = this.state;
     const minusName = filter.toLowerCase();
-    return contacts.filter(contact => contact.name.toLocaleLowerCase().includes(minusName));
+    return contacts.filter(contact => contact.name.toLowerCase().includes(minusName));
   };
 
   deleteContact = contactId => {
@@ -49,12 +51,19 @@ class App extends Component {
     this.setState({ [ name ]: value });
   };
 
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    if (contacts) {
+      this.setState({ contacts });
+    }
+  }
+
   componentDidUpdate (prevProps, prevState) {
     const { contacts } = this.state;
     if (contacts !== prevState.contacts) {
       localStorage.setItem ("contacts", JSON.stringify (contacts));
-    };
-  };
+    }
+  }
 
   render() {
     const { filter } = this.state;
@@ -64,19 +73,19 @@ class App extends Component {
       <div>
         <Section title="Phoneboock">
           <TitlePhone>Phoneboock</TitlePhone>
-          <ContacFrom onSumit = { this.viewfilter }/>
+          <ContacFrom onSumit={ this.viewfilter }/>
         </Section>
         <SectionContact title="Contacts">
           <TitleContact>Contacts</TitleContact>
-          <Filter value = { filter } onChnge = { this.viewfilter }/>
+          <Filter value={ filter } onChnge={ this.viewfilter }/>
           <ContactList
           contacts = { viewContacts }
-          onDeleteContact = { this.deleteContact }
+          onDeleteContact={ this.deleteContact }
           />
         </SectionContact>
       </div>
     );
-  };
-};
+  }
+}
 
 export default App;
