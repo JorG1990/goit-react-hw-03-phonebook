@@ -1,7 +1,6 @@
-
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Form, Input, Label, Button } from "./ContactForm.styled";
+import { Form, Label, Input, Button } from "./ContactForm.styled";
 
 class ContactForm extends Component {
   state = {
@@ -11,29 +10,29 @@ class ContactForm extends Component {
 
   changeInput = e => {
     const { name, value } = e.currentTarget;
-    this.setState({ [ name ]: value });
+    this.setState({ [name]: value });
   };
 
   submit = e => {
     e.preventDefault();
-    this.props.onSumit(this.state);
+    this.props.onSubmit(this.state);
     this.reset();
   };
 
-  reset =  () => {
-    this.setState ( { name: '', number:'' });
+  reset = () => {
+    this.setState({ name: '', number: '' });
   };
 
   static propTypes = {
-    onSumit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   };
 
-  render () {
+  render() {
     const { name, number } = this.state;
 
     return (
-      <Form onSumit={ this.submit }>
-        <Label htmlFor={ this.nameId }>
+      <Form onSubmit={this.submit}>
+        <Label htmlFor={this.nameId}>
           Name
           <Input
             type="text"
@@ -47,23 +46,24 @@ class ContactForm extends Component {
           />
         </Label>
 
-        <Label htmlFor = { this.numberId }>
+        <Label htmlFor={this.numberId}>
           Number
           <Input
-              type="tel"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-              value={number}
-              onChange={this.changeInput}
-              placeholder=""
-            />
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={number}
+            onChange={this.changeInput}
+            placeholder=""
+          />
         </Label>
-        <Button type="Submit">Add contact</Button>
+
+        <Button type="submit">Add contact</Button>
       </Form>
     );
-  };
-};
+  }
+}
 
 export default ContactForm;

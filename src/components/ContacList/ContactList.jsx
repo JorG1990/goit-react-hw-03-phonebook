@@ -4,17 +4,17 @@ import Contact from "../Contact/Contact";
 import { List } from "./ContactList.styled";
 
 const ContactList = ({ contacts, onDeleteContact }) =>{
-  return(
+  return (
     <List>
       {contacts.map (({ id, name, number }) => (
         <Contact
-        key = { id }
-        id = { id }
-        name = { name }
-        number ={ number }
-        onClick = { onDeleteContact }
+          key = { id }
+          id = { id }
+          name = { name }
+          number ={ number }
+          onClick = { onDeleteContact }
         />
-      ))};
+      ))}
     </List>
   );
 };
